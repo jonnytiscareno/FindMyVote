@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+   <head>
+<meta property="og:description" content="Are you registered to vote? Do you know where to vote? Take 10 seconds and get ready to vote like an American at FindMyVote.org!"/>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+      <style>
+      .fa-info-circle {
+  color: white;
+}
+
+      html,
+      body {
+         margin:0;
+         padding:0;
+         height:100%;
+      }
+      #container {
+         min-height:100%;
+         position:relative;
+      }
+      #header {
+         background:#ff0;
+         padding:10px;
+      }
+      #body {
+         padding:10px;
+         padding-bottom:60px;   /* Height of the footer */
+      }
+      #footer {
+         position:absolute;
+         bottom:0;
+         width:100%;
+         height:60px;   /* Height of the footer */
+         background:#6cf;
+      }
+      #warning-message { display:none; }
+
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+  .footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  #warning-message { display: none; }
+  @media only screen and (orientation:landscape){
+      #wrapper { display:none; }
+      #warning-message { display:block; }
+  }
+  @media only screen and (orientation:portrait){
+      #warning-message { display:none; }
+  }
+
+}
+
+
+
+   </style>
+      <title>Find My Vote</title>
+      <!-- Style -->
+      <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+   </head>
+   <body ng-app="myApp" ng-controller="personCtrl">
+     <div id="wrapper">
+
+      <a href="./index.html">	<img class="bg" src="./flag.png"> </a>
+      <!-- <br><br><br>{{useridSAVE}} -->
+
+      <div ng-hide="false" class="container">
+         <div ng-if="flow == 1">
+            <b><font size="12" color="white" style="font-size:60px";>HAVE YOU REGISTERED TO VOTE BEFORE?</font></b>
+            <br><br><br><br><br>
+            <div ng-click="toggle(2)" width="500" class="image">
+               <img   width="400" src="./yes.png"/>
+            </div>
+            <br><br><br>
+            <div ng-click="toggle(4)" width="500" class="image">
+               <a href="#">
+               <img  width="400" src="./no.png" />
+               </a>
+            </div>
+         </div>
+         <div ng-if="flow == 2" >
+            <b><font size="10" style="font-size:60px"; color="white">HAVE YOU REGISTERED TO VOTE BEFORE?</font></b>
+            <br><br>
+            <div width="500" class="image">
+               <a href="#">
+               <img   width="400" src="./yes.png" />
+               </a>
+            </div>
+            <br><br>
+            <div width="500" class="image">
+               <a href="#">
+               <img ng-click="toggle(30)"  width="400" src="./demo.png" />
+               </a>
+            </div>
+
+            <div width="500" class="image">
+               <a href="#">
+               <img  ng-click="toggle(31)" width="400" src="./rep.png" />
+               </a>
+            </div>
+
+            <div width="500" class="image">
+               <a href="#">
+               <img  ng-click="toggle(32)" width="400" src="./ind.png" />
+               </a>
+            </div>
+                        <div width="500" class="image">
+               <a href="#">
+               <img  ng-click="toggle(33)" width="400" src="./other.png" />
+               </a>
+            </div>
+         </div>
+
+
+
+         <div ng-if="flow == 3">
+            <!-- <b><font size="10" color="white">YOUR VOTING LOCATION IS:</font></b> -->
+            <br><br>
+            <!-- <b><a size="6.5" ng-href="https://maps.apple.com/?q={{votingLocationYES}}" color="white">{{votingLocationYES}}</a></b> -->
+            <!-- <b><u><a size="6.5" ng-href="{{votingLocationYES}}" color="white">Please CLICK HERE to visit your state's polling place locator!</a></u></b>-->
+<b><font size="6.5" color="white">If you have moved since you last registered to vote, you must register again. You can register below!</font></b><br><br>
+<b><font size="5" color="white">Check back here closer to the election for your polling place location!</font></b>
+
+            <br>
+            <div ng-show="true">
+               <br><br><br>
+               <b><font size="8" ng-bind="showURL" color="white">WANT TO REGISTER TO VOTE?</font><p></p></b>
+   <br>
+     <a ng-click="visitRegPage(1)">
+
+
+                  <div   width="300" class="image">
+                     <img   width="200" src="./yes.png"/>
+                  </div>
+               </a>
+   <br>
+               <div  width="300" class="image">
+                  <a ng-click="visitRegPage(2)">
+                  <img  width="200" src="./no.png" />
+                  </a>
+               </div>
+            </div>
+         </div>
+
+
+
+
+      </div>
+      <div class="navbar navbar-fixed-bottom footer">
+         <div class="social">
+            <ul>
+              <li><a href="https://www.facebook.com/findmyvote/"><i class="fa fa-facebook-square fa-1x" aria-hidden="true"></i></a></li>&nbsp;&nbsp;
+        <li><a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Ffindmyvote.org"><i class="fa fa-share-alt-square fa-1x" aria-hidden="true"></i></a></li>&nbsp;&nbsp;
+            <li><a href="https://twitter.com/findmyvote"><i class="fa fa-twitter fa-1x" aria-hidden="true"></i></a></li>&nbsp;&nbsp;
+              <li><a href="./about.html"><i class="fa fa-info-circle fa-1x" aria-hidden="true"></i></a></li>&nbsp;&nbsp;
+            </ul>
+         </div>
+
+         <img class="bg" src="./footer.png"><br>
+      </div>
+      <script>
+         var app = angular.module('myApp', []);
+         app.controller('personCtrl', ['$scope', '$location', '$http', '$window',
+         function($scope, $location, $http, $window) {
+             $scope.useridSAVE = "57ead0957c8cd9c82eee2b86";
+             $scope.flow = 1,
+             $scope.showURL = "VISIT VOTER REGISTRATION PAGE?" ;
+
+             $scope.toggle = function(x) {
+               if (x == 2) {
+                 $scope.updateItem("registered_to_vote_before", "true");
+
+               }
+               if (x == 30) {
+                 console.log("logging party selection");
+                 $scope.updateItem("party", "democrat");
+
+               }
+               if (x == 31) {
+                 console.log("logging party selection");
+                 $scope.updateItem("party", "republican");
+
+               }
+               if (x == 32) {
+                 console.log("logging party selection");
+                 $scope.updateItem("party", "independent");
+
+               }
+               if (x == 33) {
+                 console.log("logging party selection");
+                 $scope.updateItem("party", "other");
+
+               }
+               if (x == 4) {
+                 $scope.updateItem("registered_to_vote_before", "false");
+
+               }
+
+
+               if (x > 10) {
+                 x = 3;
+
+               }
+
+                 $scope.flow = x;
+                 if (x == 4) {
+                   $scope.flow = 3;
+                   $scope.showURL = "REGISTER TO VOTE?";
+                 }
+
+             };
+             var absUrl = $location.absUrl();
+             var searchURLAPI = "https://api.findmyvote.org/latlong" + absUrl.split('redir.html')[1];
+             //var searchURLAPI = "http://104.131.133.107:8890/mock";
+             console.log(searchURLAPI);
+             $scope.votingLocationYES = "We were unable to find a polling place associated with your current location. Try entering your home address in the address bar on the first page.";
+             $scope.votingSite = "http://registertovote.ca.gov/?ref=voteusa";
+
+            $scope.go = function ( path ) {
+              $location.path( path );
+            };
+
+
+             $http.get(searchURLAPI)
+             .then(function(response) {
+               $scope.votingLocationYES = response.data.votingLocation;
+               $scope.votingSite = response.data.votingSite;
+               $scope.useridSAVE = response.data.mongoid;
+               console.log(response.data);
+               console.log(response.data.votingLocation);
+               console.log(response.data.votingSite);
+             });
+
+
+             $scope.updateItem = function(key, value) {
+              //  $http.post('http://localhost:8890/update', {"id":"57ec271342ba1c2f525c8388","item":"cats","value":"432r234"}, {}).then(function(response){
+              //    console.log(response.data);
+               //
+              //  });
+               //
+              //  console.log('updating POST Request');
+
+
+              var updateURL = 'https://api.findmyvote.org/update?id=' + $scope.useridSAVE + '&qkey=' + key + '&qvalue=' + value;
+
+              $http.get(updateURL)
+              .then(function(response) {
+                console.log("updated");
+
+            });
+
+             };
+
+
+             $scope.visitRegPage = function(x) {
+               if (x == 1) {
+                 $scope.updateItem("visit_registration_page", "true");
+
+                 $window.location.href = $scope.votingSite;
+
+               }
+               if (x == 2) {
+                 $scope.updateItem("visit_registration_page", "false");
+
+                 $window.location.href = './about.html';
+
+               }
+
+             };
+
+
+
+         }]);
+      </script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-78833343-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</div>
+
+<div id="warning-message">
+  <br><br><br><br>
+  <b><font size="6" style="font-size:40px"; color="white">For the best Find My Vote experience please rotate your phone.</font></b>
+</div>
+
+   </body>
+</html>
