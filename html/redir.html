@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
    <head>
-<meta property="og:description" content="Are you registered to vote? Do you know where to vote? Take 10 seconds and get ready to vote like an American at FindMyVote.org!"/>
+<meta property="og:description" content="Are you registered to vote? Do you know where to vote? Take 10 seconds and get ready to vote like an American at FindMyVote.com!"/>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
@@ -154,7 +154,7 @@
          <div class="social">
             <ul>
               <li><a href="https://www.facebook.com/findmyvote/"><i class="fa fa-facebook-square fa-1x" aria-hidden="true"></i></a></li>&nbsp;&nbsp;
-        <li><a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Ffindmyvote.org"><i class="fa fa-share-alt-square fa-1x" aria-hidden="true"></i></a></li>&nbsp;&nbsp;
+        <li><a href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Ffindmyvote.com"><i class="fa fa-share-alt-square fa-1x" aria-hidden="true"></i></a></li>&nbsp;&nbsp;
             <li><a href="https://twitter.com/findmyvote"><i class="fa fa-twitter fa-1x" aria-hidden="true"></i></a></li>&nbsp;&nbsp;
               <li><a href="./about.html"><i class="fa fa-info-circle fa-1x" aria-hidden="true"></i></a></li>&nbsp;&nbsp;
             </ul>
@@ -214,7 +214,7 @@
 
              };
              var absUrl = $location.absUrl();
-             var searchURLAPI = "https://api.findmyvote.org/latlong" + absUrl.split('redir.html')[1];
+             var searchURLAPI = "https://api.findmyvote.com/latlong" + absUrl.split('redir.html')[1];
              //var searchURLAPI = "http://104.131.133.107:8890/mock";
              console.log(searchURLAPI);
              $scope.votingLocationYES = "We were unable to find a polling place associated with your current location. Try entering your home address in the address bar on the first page.";
@@ -245,7 +245,7 @@
               //  console.log('updating POST Request');
 
 
-              var updateURL = 'https://api.findmyvote.org/update?id=' + $scope.useridSAVE + '&qkey=' + key + '&qvalue=' + value;
+              var updateURL = 'https://api.findmyvote.com/update?id=' + $scope.useridSAVE + '&qkey=' + key + '&qvalue=' + value;
 
               $http.get(updateURL)
               .then(function(response) {
